@@ -1,0 +1,64 @@
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+.dark ::-webkit-scrollbar-track { background: #1e293b; }
+::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 10px; }
+.dark ::-webkit-scrollbar-thumb { background: #475569; }
+::-webkit-scrollbar-thumb:hover { background: #64748b; }
+.dark ::-webkit-scrollbar-thumb:hover { background: #525f76; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+/* Static background for Dark Mode (animation removed) */
+.dark {
+    background-color: #0f172a;
+}
+
+/* Clean background for Light Mode */
+html:not(.dark) {
+     background-color: #f8fafc; /* bg-slate-50 */
+}
+
+/* Fullscreen background canvas */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    display: block;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Glassmorphism for Dark Mode, simple shadow for Light Mode */
+.card-style {
+    transition: background-color 0.5s, box-shadow 0.5s, border-color 0.5s;
+}
+.dark .card-style {
+    background: rgba(30, 41, 59, 0.5); /* slate-800/50 */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(51, 65, 85, 0.7); /* slate-700/70 */
+}
+html:not(.dark) .card-style {
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    border: 1px solid #e2e8f0; /* slate-200 */
+}
+
+.section-title, .card {
+     opacity: 0;
+    transform: translateY(50px);
+}
+
+/* (Removed slider styles; restored static education layout) */

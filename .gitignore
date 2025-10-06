@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS/Editor junk
+.DS_Store
+Thumbs.db
+.vscode/.idea/
+
+# Env/config
+.env
+.env.*.vercel/
+
+# Caches
+.cache/.parcel-cache/.eslintcache
+
+# Build outputs
+# Note: dist/ is intentionally kept to allow deploying without a build step on Vercel
+# If you choose to build on Vercel instead, you may ignore dist/ by uncommenting below
+# dist/
+
