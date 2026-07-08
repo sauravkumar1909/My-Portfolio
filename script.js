@@ -63,6 +63,26 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- GSAP Scroll-Triggered Animations ---
     gsap.registerPlugin(ScrollTrigger);
     gsap.utils.toArray('.section-title, .card').forEach(el => {
+        gsap.utils.toArray('#projects .card').forEach((card) => {
+
+    card.addEventListener('mouseenter', () => {
+        gsap.to(card, {
+            y: -10,
+            scale: 1.03,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+
+    card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+            y: 0,
+            scale: 1,
+            duration: 0.3
+        });
+    });
+
+});
         gsap.fromTo(el, { opacity: 0, y: 50 }, {
             opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
             scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
