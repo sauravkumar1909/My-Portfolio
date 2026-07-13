@@ -10,6 +10,29 @@
 body {
     font-family: 'Inter', sans-serif;
     transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+    min-height: 100vh;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+        radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.10), transparent 38%);
+    background-size: 44px 44px, 44px 44px, 100% 100%;
+    mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
+.dark body::before {
+    background-image:
+        linear-gradient(rgba(34, 211, 238, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 211, 238, 0.045) 1px, transparent 1px),
+        radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.12), transparent 40%);
 }
 
 /* Static background for Dark Mode (animation removed) */
@@ -42,7 +65,9 @@ html:not(.dark) {
 
 /* Glassmorphism for Dark Mode, simple shadow for Light Mode */
 .card-style {
-    transition: background-color 0.5s, box-shadow 0.5s, border-color 0.5s;
+    transition: background-color 0.5s, box-shadow 0.5s, border-color 0.5s, transform 0.3s;
+    transform-style: preserve-3d;
+    will-change: transform;
 }
 .dark .card-style {
     background: rgba(30, 41, 59, 0.5); /* slate-800/50 */
@@ -59,6 +84,66 @@ html:not(.dark) .card-style {
 .section-title, .card {
      opacity: 0;
     transform: translateY(50px);
+}
+
+.active-nav {
+    color: #0891b2;
+}
+
+.dark .active-nav {
+    color: #22d3ee;
+}
+
+.active-filter {
+    background-color: #06b6d4;
+    color: #ffffff;
+    border-color: #06b6d4;
+    box-shadow: 0 10px 24px rgba(6, 182, 212, 0.24);
+}
+
+.hidden-project {
+    display: none !important;
+}
+
+.card-style:hover {
+    border-color: rgba(6, 182, 212, 0.55);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+}
+
+.dark .card-style:hover {
+    box-shadow: 0 18px 45px rgba(6, 182, 212, 0.12);
+}
+
+.skill-chip {
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.78);
+    color: #334155;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.25rem;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1;
+    transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.skill-chip:hover {
+    border-color: #06b6d4;
+    color: #0891b2;
+    transform: translateY(-2px);
+}
+
+.dark .skill-chip {
+    border-color: rgba(71, 85, 105, 0.85);
+    background: rgba(30, 41, 59, 0.72);
+    color: #cbd5e1;
+}
+
+.dark .skill-chip:hover {
+    border-color: #22d3ee;
+    color: #67e8f9;
 }
 
 /* (Removed slider styles; restored static education layout) */

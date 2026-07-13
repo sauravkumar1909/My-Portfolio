@@ -32,13 +32,43 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
 
-    // --- Header Style on Scroll ---
+    // --- Header, Scroll Progress, and Back-to-top ---
     const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
+    const scrollProgress = document.getElementById('scroll-progress');
+    const backToTop = document.getElementById('back-to-top');
+    const updateScrollUi = () => {
         header.classList.toggle('py-2', window.scrollY > 50);
         header.classList.toggle('py-4', window.scrollY <= 50);
-    });
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+        scrollProgress.style.width = `${progress}%`;
+        backToTop.classList.toggle('opacity-0', window.scrollY < 500);
+        backToTop.classList.toggle('translate-y-4', window.scrollY < 500);
+        backToTop.classList.toggle('pointer-events-none', window.scrollY < 500);
+    };
+    window.addEventListener('scroll', updateScrollUi, { passive: true });
+    updateScrollUi();
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // --- Active Nav Link ---
+    const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+    const observedSections = navLinks
+        .map((link) => document.querySelector(link.getAttribute('href')))
+        .filter(Boolean);
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            navLinks.forEach((link) => {
+                const isActive = link.getAttribute('href') === `#${entry.target.id}`;
+                link.classList.toggle('active-nav', isActive);
+            });
+        });
+    }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+    observedSections.forEach((section) => sectionObserver.observe(section));
 
     // --- Email Copy to Clipboard ---
     const copyEmailButton = document.getElementById('copy-email');
@@ -60,32 +90,65 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.removeChild(tempTextArea);
     });
 
+    // --- Contact Form Mail Draft ---
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        const subject = encodeURIComponent(`Portfolio message from ${name || 'visitor'}`);
+        const body = encodeURIComponent(`${message}\n\nFrom: ${name || 'Visitor'}\nEmail: ${email || 'Not provided'}`);
+        window.location.href = `mailto:kumar1909saurav@gmail.com?subject=${subject}&body=${body}`;
+        notification.textContent = 'Opening email app...';
+        notification.classList.remove('opacity-0', 'translate-y-2');
+        setTimeout(() => {
+            notification.classList.add('opacity-0', 'translate-y-2');
+            notification.textContent = 'Email copied to clipboard!';
+        }, 2200);
+    });
+
+    // --- Project Filters ---
+    const filterButtons = Array.from(document.querySelectorAll('.project-filter'));
+    const projectCards = Array.from(document.querySelectorAll('.project-card'));
+    filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const filter = button.dataset.filter;
+            filterButtons.forEach((btn) => btn.classList.toggle('active-filter', btn === button));
+            projectCards.forEach((card) => {
+                const categories = (card.dataset.category || '').split(/\s+/).filter(Boolean);
+                const shouldShow = filter === 'all' || categories.includes(filter);
+                card.classList.toggle('hidden-project', !shouldShow);
+                card.hidden = !shouldShow;
+                if (shouldShow && window.gsap) {
+                    gsap.fromTo(card, { opacity: 0, y: 18, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: 'power2.out' });
+                }
+            });
+        });
+    });
+
     // --- GSAP Scroll-Triggered Animations ---
     gsap.registerPlugin(ScrollTrigger);
     gsap.utils.toArray('.section-title, .card').forEach(el => {
-        gsap.utils.toArray('#projects .card').forEach((card) => {
-
-    card.addEventListener('mouseenter', () => {
-        gsap.to(card, {
-            y: -10,
-            scale: 1.03,
-            duration: 0.3,
-            ease: "power2.out"
-        });
-    });
-
-    card.addEventListener('mouseleave', () => {
-        gsap.to(card, {
-            y: 0,
-            scale: 1,
-            duration: 0.3
-        });
-    });
-
-});
         gsap.fromTo(el, { opacity: 0, y: 50 }, {
             opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
             scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+        });
+    });
+
+    // --- Interactive Card Tilt ---
+    const tiltCards = gsap.utils.toArray('.project-card');
+    tiltCards.forEach((card) => {
+        card.addEventListener('mousemove', (event) => {
+            const rect = card.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            const rotateY = ((x / rect.width) - 0.5) * 8;
+            const rotateX = ((0.5 - y / rect.height)) * 8;
+            gsap.to(card, { rotateX, rotateY, y: -6, scale: 1.02, duration: 0.25, transformPerspective: 800, ease: 'power2.out' });
+        });
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, { rotateX: 0, rotateY: 0, y: 0, scale: 1, duration: 0.35, ease: 'power2.out' });
         });
     });
 
@@ -152,9 +215,9 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const config = {
-        blobCountBase: 10,
-        moveSpeed: 0.2,
-        mouseInfluence: 140,
+        blobCountBase: 7,
+        moveSpeed: 0.08,
+        mouseInfluence: 90,
     };
 
     function resizeCanvas() {
@@ -179,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 y: random(0, state.height),
                 vx: random(-config.moveSpeed, config.moveSpeed),
                 vy: random(-config.moveSpeed, config.moveSpeed),
-                r: random(60, 160),
+                r: random(80, 220),
                 hueOffset: random(0, 360),
             });
         }
@@ -190,9 +253,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const dark = state.theme === 'dark';
         return {
             base: dark ? '#0f172a' : '#f8fafc',
-            accent1: dark ? 175 : 190, // hue seeds
-            accent2: dark ? 190 : 200,
-            accent3: dark ? 160 : 170,
+            accent1: dark ? 190 : 188,
+            accent2: dark ? 215 : 205,
+            accent3: dark ? 165 : 170,
         };
     }
 
@@ -243,11 +306,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const hue2 = (hue + 30) % 360;
 
             const grad = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
-            const alphaCore = state.theme === 'dark' ? 0.45 : 0.28;
-            const alphaEdge = state.theme === 'dark' ? 0.05 : 0.04;
-            grad.addColorStop(0, `hsla(${Math.floor(hue)}, 85%, 60%, ${alphaCore})`);
-            grad.addColorStop(0.6, `hsla(${Math.floor(hue2)}, 85%, 60%, ${alphaCore * 0.6})`);
-            grad.addColorStop(1, `hsla(${Math.floor(hue)}, 85%, 60%, ${alphaEdge})`);
+            const alphaCore = state.theme === 'dark' ? 0.16 : 0.12;
+            const alphaEdge = state.theme === 'dark' ? 0.015 : 0.012;
+            grad.addColorStop(0, `hsla(${Math.floor(hue)}, 80%, 62%, ${alphaCore})`);
+            grad.addColorStop(0.55, `hsla(${Math.floor(hue2)}, 75%, 58%, ${alphaCore * 0.45})`);
+            grad.addColorStop(1, `hsla(${Math.floor(hue)}, 70%, 55%, ${alphaEdge})`);
             ctx.fillStyle = grad;
             ctx.beginPath();
             ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);

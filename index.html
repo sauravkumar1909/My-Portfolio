@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
     
     <!-- Built Tailwind CSS -->
-    <link rel="stylesheet" href="dist/output.css">
+    <link rel="stylesheet" href="dist/output.css?v=2">
     
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,6 +24,7 @@
 
     <!-- Interactive Background Canvas -->
     <canvas id="bg-canvas" aria-hidden="true"></canvas>
+    <div id="scroll-progress" class="fixed left-0 top-0 z-[60] h-1 w-0 bg-cyan-500 shadow-[0_0_14px_rgba(6,182,212,0.8)]"></div>
 
     <!-- Header -->
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800">
@@ -31,11 +32,11 @@
             <a href="#" class="text-2xl font-bold text-slate-900 dark:text-white">Saurav Kumar</a>
             <div class="flex items-center space-x-4 md:space-x-8">
                 <nav class="hidden md:flex space-x-8">
-                    <a href="#summary" class="text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition">About</a>
-                    <a href="#skills" class="text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition">Skills</a>
-                    <a href="#projects" class="text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition">Projects</a>
-                    <a href="#education" class="text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition">Education</a>
-                    <a href="#contact" class="text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition">Contact</a>
+                    <a href="#summary" class="nav-link text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition">About</a>
+                    <a href="#skills" class="nav-link text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition">Skills</a>
+                    <a href="#projects" class="nav-link text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition">Projects</a>
+                    <a href="#education" class="nav-link text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition">Education</a>
+                    <a href="#contact" class="nav-link text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition">Contact</a>
                 </nav>
                 <!-- Theme Toggle Button -->
                 <button id="theme-toggle" class="text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition">
@@ -68,7 +69,7 @@
                     <span class="inline-block w-0.5 h-6 md:h-7 bg-cyan-500 ml-1 align-middle animate-pulse" aria-hidden="true"></span>
                 </p>
                 <p class="max-w-xl text-2xl mx-auto md:mx-0 leading-relaxed">
-                    Aspiring Frontend Developer with experience building responsive UIs using React.js, Tailwind CSS, and Redux. Completed real-world projects like Razorpay and Myntra clones with component-based design. Proficient in JavaScript, Git, and API integration. Eager to contribute to a fast-paced startup environment and grow by solving real-world problems.
+                    Frontend Developer focused on building responsive, accessible UIs with React.js, Tailwind CSS, and Redux. I enjoy turning ideas into clean interfaces, integrating APIs, and exploring AI-powered product experiences.
                 </p>
                 <!-- Buttons -->
                 <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
@@ -81,9 +82,9 @@
                 </div>
             </div>
             <!-- Right Column (Image) -->
-            <div class="flex"> <img src="IMG_20251007_002858.png" 
+            <div class="mt-12 flex justify-center md:mt-0 md:w-1/2 lg:w-2/5"> <img src="IMG_20251007_002858.png" 
        alt="Profile Picture" 
-       class="w-80 h-80 rounded-full object-cover border-4 border-cyan-500 ml-10">
+       class="h-64 w-64 rounded-full border-4 border-cyan-500 object-cover shadow-2xl shadow-cyan-500/20 sm:h-72 sm:w-72 md:ml-10 lg:h-80 lg:w-80">
 </div>
         </section>
 
@@ -91,33 +92,66 @@
         <section id="skills" class="py-20 bg-slate-100 dark:bg-transparent">
             <div class="container mx-auto px-6">
                 <h2 class="section-title text-4xl font-bold text-center text-slate-900 dark:text-white mb-12">Technical Skills</h2>
-                <div class="max-w-4xl mx-auto">
-                    <div class="card mb-8 p-6 rounded-lg card-style">
-                        <h3 class="text-xl font-semibold text-cyan-600 dark:text-cyan-400 mb-4">Programming Languages</h3>
+                <div class="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    <div class="card card-style rounded-lg p-6">
+                        <div class="mb-5 flex items-center gap-4">
+                            <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Languages</h3>
+                        </div>
                         <div class="flex flex-wrap gap-3">
-                            <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-full text-sm font-medium">C++</span>
-                            <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-full text-sm font-medium">Python</span>
-                            <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-full text-sm font-medium">HTML</span>
-                            <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-full text-sm font-medium">CSS</span>
-                            <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-full text-sm font-medium">JavaScript</span>
+                            <span class="skill-chip">C++</span>
+                            <span class="skill-chip">Python</span>
+                            <span class="skill-chip">JavaScript</span>
                         </div>
                     </div>
-                    <div class="card mb-8 p-6 rounded-lg card-style">
-                        <h3 class="text-xl font-semibold text-cyan-600 dark:text-cyan-400 mb-4">Frameworks & Libraries</h3>
+                    <div class="card card-style rounded-lg p-6">
+                        <div class="mb-5 flex items-center gap-4">
+                            <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Frontend</h3>
+                        </div>
                         <div class="flex flex-wrap gap-3">
-                            <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-full text-sm font-medium">React.js</span>
-                            <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-full text-sm font-medium">Redux</span>
-                            <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-full text-sm font-medium">Tailwind CSS</span>
+                            <span class="skill-chip">HTML</span>
+                            <span class="skill-chip">CSS</span>
+                            <span class="skill-chip">React.js</span>
+                            <span class="skill-chip">Redux Toolkit</span>
+                            <span class="skill-chip">Tailwind CSS</span>
+                            <span class="skill-chip">Responsive UI</span>
+                            <span class="skill-chip">Component Design</span>
+                            <span class="skill-chip">API Integration</span>
                         </div>
                     </div>
-                    <div class="card p-6 rounded-lg card-style">
-                        <h3 class="text-xl font-semibold text-cyan-600 dark:text-cyan-400 mb-4">Development Tools & Others</h3>
+                    <div class="card card-style rounded-lg p-6">
+                        <div class="mb-5 flex items-center gap-4">
+                            <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Backend & APIs</h3>
+                        </div>
                         <div class="flex flex-wrap gap-3">
-                            <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-full text-sm font-medium">VS Code</span>
-                            <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-full text-sm font-medium">Git</span>
-                            <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-full text-sm font-medium">GitHub</span>
-                            <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-full text-sm font-medium">Data Structures & Algorithms</span>
-                            <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-full text-sm font-medium">MySQL (Basic)</span>
+                            <span class="skill-chip">Node.js</span>
+                            <span class="skill-chip">Express.js</span>
+                            <span class="skill-chip">REST APIs</span>
+                            <span class="skill-chip">MySQL</span>
+                        </div>
+                    </div>
+                    <div class="card card-style rounded-lg p-6 md:col-span-2 lg:col-span-1">
+                        <div class="mb-5 flex items-center gap-4">
+                            <h3 class="text-xl font-semibold text-slate-900 dark:text-white">AI & GenAI</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-chip">Generative AI</span>
+                            <span class="skill-chip">RAG</span>
+                            <span class="skill-chip">Vector DB</span>
+                            <span class="skill-chip">Gemini AI</span>
+                            <span class="skill-chip">Prompt Engineering</span>
+                            <span class="skill-chip">Embeddings</span>
+                        </div>
+                    </div>
+                    <div class="card card-style rounded-lg p-6 md:col-span-2">
+                        <div class="mb-5 flex items-center gap-4">
+                            <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Tools & Core CS</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-chip">Git</span>
+                            <span class="skill-chip">GitHub</span>
+                            <span class="skill-chip">VS Code</span>
+                            <span class="skill-chip">Data Structures</span>
+                            <span class="skill-chip">Algorithms</span>
                         </div>
                     </div>
                 </div>
@@ -128,37 +162,43 @@
         <section id="projects" class="py-20">
             <div class="container mx-auto px-6">
                 <h2 class="section-title text-4xl font-bold text-center text-slate-900 dark:text-white mb-12">Projects</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="mb-10 flex flex-wrap justify-center gap-3" aria-label="Project filters">
+                    <button class="project-filter active-filter rounded-full border border-cyan-500 px-5 py-2 text-sm font-semibold text-cyan-600 transition hover:bg-cyan-500 hover:text-white dark:text-cyan-400 dark:hover:text-white" data-filter="all">All</button>
+                    <button class="project-filter rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-600 transition hover:border-cyan-500 hover:text-cyan-600 dark:border-slate-700 dark:text-slate-300 dark:hover:text-cyan-400" data-filter="react">React</button>
+                    <button class="project-filter rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-600 transition hover:border-cyan-500 hover:text-cyan-600 dark:border-slate-700 dark:text-slate-300 dark:hover:text-cyan-400" data-filter="tailwind">Tailwind</button>
+                    <button class="project-filter rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-600 transition hover:border-cyan-500 hover:text-cyan-600 dark:border-slate-700 dark:text-slate-300 dark:hover:text-cyan-400" data-filter="ai">AI</button>
+                </div>
+                <div id="project-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Project 1 -->
-                    <div class="card card-style rounded-lg p-6 flex flex-col">
+                    <div class="card project-card card-style rounded-lg p-6 flex flex-col" data-category="react">
                         <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">E-Commerce Website</h3>
                         <p class="text-cyan-600 dark:text-cyan-400 text-sm mb-4">React.js, Redux, JavaScript, HTML, CSS</p>
                         <p class="text-slate-600 dark:text-slate-300 flex-grow mb-4">Built a fully responsive e-commerce application inspired by Myntra with product browsing, filtering, cart management, and state management using Redux Toolkit. Implemented reusable React components to deliver a smooth shopping experience.</p>
                         <div class="mt-auto flex items-center space-x-4">
-                            <a href="https://github.com/sauravkumar1909/Myntra.git" target="_blank" class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition duration-300" title="GitHub Repository">
+                            <a href="https://github.com/sauravkumar1909/Myntra.git" target="_blank" rel="noopener noreferrer" class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition duration-300" title="GitHub Repository">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"></path></svg>
                             </a>
-                            <a href="https://e-commerce-beta-six-dy6x7224z8.vercel.app/" target="_blank" class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition duration-300" title="Live Preview">
+                            <a href="https://e-commerce-beta-six-dy6x7224z8.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition duration-300" title="Live Preview">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                             </a>
                         </div>
                     </div>
                     <!-- Project 2 -->
-                    <div class="card card-style rounded-lg p-6 flex flex-col">
+                    <div class="card project-card card-style rounded-lg p-6 flex flex-col" data-category="tailwind">
                         <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Razorpay Homepage Clone</h3>
                         <p class="text-cyan-600 dark:text-cyan-400 text-sm mb-4">HTML, CSS, Tailwind CSS</p>
                         <p class="text-slate-600 dark:text-slate-300 flex-grow mb-4">Designed and developed a pixel-perfect clone of the Razorpay landing page using Tailwind CSS. Focused on responsive layouts, modern UI design, Flexbox, Grid, and reusable components to closely match the original website.</p>
                         <div class="mt-auto flex items-center space-x-4">
-                            <a href="https://github.com/sauravkumar1909/Razorpay_Clone.git" target="_blank" class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition duration-300" title="GitHub Repository">
+                            <a href="https://github.com/sauravkumar1909/Razorpay_Clone.git" target="_blank" rel="noopener noreferrer" class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition duration-300" title="GitHub Repository">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"></path></svg>
                             </a>
-                            <a href="https://razorpay-clone-9w1q.vercel.app/" target="_blank" class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition duration-300" title="Live Preview">
+                            <a href="https://razorpay-clone-9w1q.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition duration-300" title="Live Preview">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                             </a>
                         </div>
                     </div>
                     <!-- Project 3 -->
-<div class="card card-style rounded-lg p-6 flex flex-col">
+<div class="card project-card card-style rounded-lg p-6 flex flex-col" data-category="react ai">
     <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">
         AI Movie Recommendation System
     </h3>
@@ -174,10 +214,10 @@
     <div class="mt-auto flex items-center space-x-4">
 
         <!-- Github -->
-        <a href="YOUR_GITHUB_LINK"
-           target="_blank"
-           class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition duration-300"
-           title="GitHub Repository">
+        <a href="#"
+           aria-disabled="true"
+           class="pointer-events-none text-slate-400 opacity-50 dark:text-slate-500 transition duration-300"
+           title="GitHub link coming soon">
 
             <svg class="w-6 h-6" fill="currentColor"
                 viewBox="0 0 24 24">
@@ -203,10 +243,10 @@
         </a>
 
         <!-- Live Demo -->
-        <a href="YOUR_LIVE_LINK"
-           target="_blank"
-           class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition duration-300"
-           title="Live Preview">
+        <a href="#"
+           aria-disabled="true"
+           class="pointer-events-none text-slate-400 opacity-50 dark:text-slate-500 transition duration-300"
+           title="Live preview coming soon">
 
             <svg class="w-6 h-6"
                  fill="none"
@@ -226,7 +266,7 @@
     </div>
 </div>
             <!-- Project 4 -->
-<div class="card card-style rounded-lg p-6 flex flex-col">
+<div class="card project-card card-style rounded-lg p-6 flex flex-col" data-category="react tailwind">
 
     <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">
         Swiggy Clone
@@ -254,10 +294,10 @@
     <div class="mt-auto flex items-center space-x-4">
 
         <!-- GitHub -->
-        <a href="https://github.com/sauravkumar1909/YOUR-REPOSITORY"
-            target="_blank"
-            class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition duration-300"
-            title="GitHub Repository">
+        <a href="#"
+            aria-disabled="true"
+            class="pointer-events-none text-slate-400 opacity-50 dark:text-slate-500 transition duration-300"
+            title="GitHub link coming soon">
 
             <svg class="w-6 h-6" fill="currentColor"
                 viewBox="0 0 24 24">
@@ -282,10 +322,10 @@
         </a>
 
         <!-- Live Demo -->
-        <a href="https://YOUR-LIVE-DEMO.vercel.app"
-            target="_blank"
-            class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition duration-300"
-            title="Live Preview">
+        <a href="#"
+            aria-disabled="true"
+            class="pointer-events-none text-slate-400 opacity-50 dark:text-slate-500 transition duration-300"
+            title="Live preview coming soon">
 
             <svg class="w-6 h-6"
                 fill="none"
@@ -375,12 +415,12 @@
                         </div>
 
                     <div class="flex justify-center md:justify-start space-x-6">
-                        <a href="https://github.com/sauravkumar1909" target="_blank" class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg></a>
-                        <a href="www.linkedin.com/in/saurav-kumar-51b132332" target="_blank" class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                        <a href="https://github.com/sauravkumar1909" target="_blank" rel="noopener noreferrer" class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg></a>
+                        <a href="https://www.linkedin.com/in/saurav-kumar-51b132332" target="_blank" rel="noopener noreferrer" class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
                     </div>
                 </div>
                 <!-- Right Column: Form -->
-                <form action="#" class="space-y-4">
+                <form id="contact-form" action="#" class="space-y-4">
                     <div>
                         <label for="name" class="sr-only">Your Name</label>
                         <input type="text" id="name" name="name" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg bg-slate-200 dark:bg-slate-800 border border-transparent focus:outline-none focus:ring-2 focus:ring-cyan-500">
@@ -398,21 +438,18 @@
                     </button>
                 </form>
             </div>
-             <p class="text-center text-slate-500 text-sm mt-16">&copy; 2025 Saurav Kumar. All Rights Reserved.</p>
+             <p class="text-center text-slate-500 text-sm mt-16">&copy; 2026 Saurav Kumar. All Rights Reserved.</p>
         </div>
     </footer>
 
     <div id="copy-notification" class="fixed bottom-5 right-5 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 translate-y-2 transition-all duration-300">
         Email copied to clipboard!
     </div>
+    <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-5 left-5 z-50 flex h-11 w-11 translate-y-4 items-center justify-center rounded-full bg-cyan-500 text-white opacity-0 shadow-lg transition-all duration-300 hover:bg-cyan-600">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+    </button>
 
     <!-- External JS File -->
-    <script src="script.js"></script>
-    <script>
-        // Tailwind config ko yahan rakhein taki CDN use kar sake
-        tailwind.config = {
-          darkMode: 'class',
-        }
-    </script>
+    <script src="script.js?v=2"></script>
 </body>
 </html>
